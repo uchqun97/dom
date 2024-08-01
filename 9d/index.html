@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input placeholder="Ismingizni kiriting" class="name-input">
+    <button class="btn" onclick="getInputValue()">Submit</button>
+    <p class="name"></p>
+    <script>
+        function getInputValue() {
+            const input = document.querySelector('.name-input');
+            const inputValue = input.value;
+            document.querySelector('.name').textContent = `Sizning ismingiz ${inputValue}`;
+        }
+    </script>
+</body>
+</html>

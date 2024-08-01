@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <p>Rock Paper Scissors</p>
+    <button onclick="playGame('chikka')">Chikka</button>
+    <button onclick="playGame('pukka')">Pukka</button>
+
+    <p class="js-result"></p>
+    <p class="js-moves"></p>
+    <p class="js-score"></p>
+
+    <button onclick="
+        hisob.wins = 0;
+        hisob.losses = 0;
+        localStorage.removeItem('score');
+        updateScoreElement();
+    ">Qayta Boshlash</button>
+
+    <script>
+        let hisob = JSON.parse(localStorage.getItem('score')) || {
+            wins: 0,
+            losses: 0,
+        };
+
+        updateScoreElement();
+
+        function playGame(playerMove) {
+            const computerMove = pickComputerMove();
+            let result = '';
+
+            if (playerMove === 'chikka') {
+                if (computerMove === 'pukka') {
+                    result = 'Yutqazdingiz.';
+                } else if (computerMove === 'chikka') {
+                    result = 'G\'alaba qozondingiz.';
+                }
+            } else if (playerMove === 'pukka') {
+                if (computerMove === 'pukka') {
+                    result = 'G\'alaba qozondingiz.';
+                } else if (computerMove === 'chikka') {
+                    result = 'Yutqazdingiz.';
+                }
+            }
+
+            if (result === 'G\'alaba qozondingiz.') {
+                hisob.wins += 1;
+            } else if (result === 'Yutqazdingiz.') {
+                hisob.losses += 1;
+            }
+
+            localStorage.setItem('score', JSON.stringify(hisob));
+            updateScoreElement();
+
+            document.querySelector('.js-result').innerHTML = result;
+            document.querySelector('.js-moves').innerHTML = `Siz ${playerMove} tanladingiz - Computer esa ${computerMove} tanladi`;
+        }
+
+        function updateScoreElement() {
+            document.querySelector('.js-score')
+                .innerHTML = `Wins: ${hisob.wins}, Losses: ${hisob.losses}`;
+        }
+
+        function pickComputerMove() {
+            const randomNumber = Math.random();
+            let computerMove = '';
+
+            if (randomNumber >= 0 && randomNumber < 1 / 2) {
+                computerMove = 'chikka';
+            } else if (randomNumber >= 1 / 2 && randomNumber < 1) {
+                computerMove = 'pukka';
+            }
+
+            return computerMove;
+        }
+    </script>
+</body>
+</html>

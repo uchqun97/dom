@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>onkeyup</p>
+
+Enter your name: <input type="text" id="fname" onkeyup="myFunction()">
+
+<p>My name is: <span id="demo"></span></p>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("fname").value;
+  document.getElementById("demo").innerHTML = x;
+}
+</script>
+
+</body>
+</html>
